@@ -1,0 +1,10 @@
+{
+  "name": "clickmates-functions",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Backend serverless de Click Mates (Netlify Functions)",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "transbank-sdk": "^6.1.0"
+  }
+}

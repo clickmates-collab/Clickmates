@@ -1,0 +1,465 @@
+/* ============================================================
+   Click Mates — Estilos (v3, paleta papel/dorado/esmeralda)
+   Complementa a Tailwind (CDN) con componentes reutilizables.
+   ============================================================ */
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #0E1416;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display { letter-spacing: -0.01em; }
+h1, h2, h3 { text-wrap: balance; }
+
+.hero-glow {
+  background: radial-gradient(ellipse 1000px 560px at 20% -15%, rgba(201, 162, 39, 0.16), transparent 62%);
+}
+
+.view.hidden, .tab.hidden { display: none; }
+
+/* ---------- Encabezado ---------- */
+header {
+  box-shadow: 0 1px 0 rgba(147, 162, 153, 0.15);
+}
+
+.logo-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #C9A227;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(201, 162, 39, 0.35);
+}
+
+/* ---------- Tarjetas oscuras (paneles de control) ---------- */
+.card {
+  background: #16211D;
+  border: 1px solid rgba(147, 162, 153, 0.15);
+  border-radius: 16px;
+}
+
+/* ---------- Tarjetas "boleta" (papel claro, estilo recibo) ---------- */
+.card-paper {
+  background: #F3EEE3;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px -24px rgba(0, 0, 0, 0.6);
+  color: #0E1416;
+}
+
+.perforation {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0.75rem 0;
+  overflow: hidden;
+}
+
+.perforation span {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: #D8D2C2;
+  flex-shrink: 0;
+}
+
+.receipt-item {
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #D8D2C2;
+}
+
+.receipt-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+/* ---------- Tarjetas de métricas ---------- */
+.stat-card {
+  position: relative;
+  background: #16211D;
+  border: 1px solid rgba(147, 162, 153, 0.15);
+  border-radius: 14px;
+  padding: 1.15rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #93A299;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #F3EEE3;
+  font-variant-numeric: tabular-nums;
+}
+
+.empty-state {
+  border: 1px dashed rgba(147, 162, 153, 0.3);
+  border-radius: 16px;
+  padding: 4rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ---------- Formularios ---------- */
+.form-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #93A299;
+  margin-bottom: 0.45rem;
+}
+
+.form-input {
+  width: 100%;
+  background: #0E1416;
+  border: 1px solid rgba(147, 162, 153, 0.2);
+  border-radius: 9px;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.9rem;
+  color: #F3EEE3;
+  outline: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.form-input::placeholder { color: rgba(147, 162, 153, 0.55); }
+
+.form-input:focus {
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.25);
+}
+
+.form-input option { background: #16211D; }
+
+/* Input dentro de una tarjeta clara (boleta) — necesita fondo oscuro para contraste */
+.form-input-on-paper {
+  background: #0E1416;
+  color: #F3EEE3;
+  border-radius: 9px;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.85rem;
+  font-family: 'JetBrains Mono', monospace;
+  outline: none;
+  border: none;
+}
+
+/* ---------- Botones ---------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #C9A227;
+  color: #0E1416;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.72rem 1.3rem;
+  border-radius: 9px;
+  transition: filter 0.12s ease, transform 0.12s ease;
+}
+
+.btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-primary:disabled {
+  background: rgba(147, 162, 153, 0.18);
+  color: rgba(243, 238, 227, 0.4);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: #0E1416;
+  color: #F3EEE3;
+  font-weight: 600;
+  font-size: 0.87rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 9px;
+  transition: filter 0.12s ease;
+}
+
+.btn-dark:hover { filter: brightness(1.3); }
+
+.btn-secondary {
+  background: rgba(46, 125, 91, 0.12);
+  color: #2E7D5B;
+  font-weight: 600;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 7px;
+  transition: background 0.15s ease;
+}
+
+.btn-secondary:hover { background: rgba(46, 125, 91, 0.2); }
+
+.btn-ghost {
+  font-size: 0.87rem;
+  font-weight: 500;
+  color: #93A299;
+  padding: 0.55rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid rgba(147, 162, 153, 0.25);
+  transition: all 0.15s ease;
+}
+
+.btn-ghost:hover { color: #F3EEE3; border-color: rgba(201, 162, 39, 0.5); }
+
+/* ---------- Verificación de RUT ---------- */
+.btn-verificar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  border-radius: 9px;
+  padding: 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: #F3EEE3;
+  color: #0E1416;
+  transition: background 0.15s ease;
+}
+
+.btn-verificar.verificado {
+  background: rgba(46, 125, 91, 0.18);
+  color: #3FAE7E;
+}
+
+.btn-verificar:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* ---------- Badges ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+}
+
+.badge-emerald { background: rgba(46, 125, 91, 0.15); color: #3FAE7E; box-shadow: inset 0 0 0 1px rgba(46, 125, 91, 0.35); }
+.badge-coral   { background: rgba(214, 96, 63, 0.15); color: #E58363; box-shadow: inset 0 0 0 1px rgba(214, 96, 63, 0.35); }
+.badge-gold    { background: rgba(201, 162, 39, 0.15); color: #D9B84A; box-shadow: inset 0 0 0 1px rgba(201, 162, 39, 0.35); }
+.badge-muted   { background: rgba(147, 162, 153, 0.15); color: #93A299; box-shadow: inset 0 0 0 1px rgba(147, 162, 153, 0.3); }
+
+/* Compatibilidad con nombres usados en JS existente */
+.badge-pendiente { background: rgba(201, 162, 39, 0.15); color: #D9B84A; box-shadow: inset 0 0 0 1px rgba(201, 162, 39, 0.35); display:inline-flex; align-items:center; gap:.35rem; width:fit-content; font-size:.75rem; font-weight:600; padding:.3rem .65rem; border-radius:999px; }
+.badge-transferido { background: rgba(46, 125, 91, 0.15); color: #3FAE7E; box-shadow: inset 0 0 0 1px rgba(46, 125, 91, 0.35); display:inline-flex; align-items:center; gap:.35rem; width:fit-content; font-size:.75rem; font-weight:600; padding:.3rem .65rem; border-radius:999px; }
+
+/* ---------- Barra de progreso ---------- */
+.progreso-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(147, 162, 153, 0.2);
+}
+
+.progreso-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* ---------- Aviso de flash/estado ---------- */
+.flash {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  border-radius: 9px;
+  padding: 0.55rem 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.flash-warn { background: rgba(214, 96, 63, 0.15); color: #E58363; }
+.flash-ok { background: rgba(46, 125, 91, 0.15); color: #3FAE7E; }
+
+/* ---------- Filas de enlaces/contenidos ---------- */
+.enlace-url {
+  font-family: 'JetBrains Mono', monospace;
+  color: #C9A227;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.campana-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(147, 162, 153, 0.15);
+  border-radius: 11px;
+  padding: 0.95rem 1.05rem;
+}
+
+/* ---------- Notificación flotante (toast) ---------- */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: #16211D;
+  border: 1px solid rgba(147, 162, 153, 0.25);
+  color: #F3EEE3;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.8rem 1.35rem;
+  border-radius: 11px;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.toast.hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(10px);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition-duration: 0.01ms !important; }
+}
+
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid #3FAE7E;
+  outline-offset: 2px;
+}
+
+/* ---------- Preguntas frecuentes (acordeón) ---------- */
+.faq-tab {
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  color: #93A299;
+  transition: all 0.15s ease;
+}
+
+.faq-tab.active {
+  background: #C9A227;
+  color: #0E1416;
+}
+
+.faq-item {
+  background: #16211D;
+  border: 1px solid rgba(147, 162, 153, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.faq-pregunta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #F3EEE3;
+  cursor: pointer;
+}
+
+.faq-pregunta .faq-icono {
+  flex-shrink: 0;
+  color: #C9A227;
+  font-family: 'JetBrains Mono', monospace;
+  transition: transform 0.2s ease;
+}
+
+.faq-item.abierto .faq-icono { transform: rotate(45deg); }
+
+.faq-respuesta {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+}
+
+.faq-item.abierto .faq-respuesta { max-height: 2000px; }
+
+.faq-respuesta-inner {
+  padding: 0 1.25rem 1.15rem;
+  font-size: 0.87rem;
+  line-height: 1.6;
+  color: #93A299;
+}
+
+.faq-respuesta-inner ul {
+  margin-top: 0.5rem;
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+
+.faq-respuesta-inner li { margin-bottom: 0.35rem; }
+.faq-respuesta-inner strong { color: #D9B84A; font-weight: 600; }
+
+/* ============================================================
+   Tabla de detalle antifraude (paneles de marca y creador)
+   ============================================================ */
+.tabla-clics {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  font-family: inherit;
+}
+
+.tabla-clics th {
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  color: #93A299;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  white-space: nowrap;
+}
+
+.tabla-clics td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  white-space: nowrap;
+}
+
+.tabla-clics tr:last-child td { border-bottom: none; }
+
+.chip-resumen {
+  border-radius: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: #0E1416;
+}
+
+.chip-resumen p:first-child {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #93A299;
+  margin-bottom: 0.15rem;
+}
+
+.chip-resumen p:last-child {
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.estado-valido { color: #3FAE7E; font-weight: 600; }
+.estado-anulado { color: #E0765C; font-weight: 600; }
+.vpn-si { color: #E0765C; font-weight: 600; }
+.vpn-no { color: #93A299; }

@@ -1,0 +1,17 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Enlaces de afiliado: /r/{id} -> función que registra el clic y redirige
+[[redirects]]
+  from = "/r/*"
+  to = "/.netlify/functions/click?enlace=:splat"
+  status = 200
+  force = true
+
+# Retorno de Webpay tras el pago
+[[redirects]]
+  from = "/pago/confirmar"
+  to = "/.netlify/functions/confirmar-pago-marca"
+  status = 200
+  force = true

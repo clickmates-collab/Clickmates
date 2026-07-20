@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Click Mates | Cada clic, contado y pagado</title>
+<meta name="description" content="Conecta marcas chilenas con creadores de contenido. Paga solo por clics verificados desde Chile.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink:           '#0E1416',
+          panel:         '#16211D',
+          paper:         '#F3EEE3',
+          gold:          '#C9A227',
+          'gold-claro':  '#D9B84A',
+          emerald:       '#2E7D5B',
+          'emerald-claro': '#3FAE7E',
+          coral:         '#D6603F',
+          'coral-claro': '#E58363',
+          muted:         '#93A299',
+          arena:         '#F3EEE3',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          body: ['"Inter"', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        }
+      }
+    }
+  }
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-body bg-ink text-arena antialiased">
+
+<header class="sticky top-0 z-50 bg-ink/95 backdrop-blur">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <button data-view-target="landing" class="nav-link flex items-center gap-2.5 font-display font-semibold text-lg">
+      <span class="logo-mark"></span>
+      Click Mates
+    </button>
+    <nav class="hidden md:flex items-center gap-1 text-sm font-medium text-muted">
+      <button data-view-target="landing" data-scroll="pymes" class="nav-link px-3 py-2 rounded-md hover:text-arena hover:bg-white/5 transition">Para marcas</button>
+      <button data-view-target="landing" data-scroll="creadores" class="nav-link px-3 py-2 rounded-md hover:text-arena hover:bg-white/5 transition">Para creadores</button>
+      <button data-view-target="landing" data-scroll="preguntas" class="nav-link px-3 py-2 rounded-md hover:text-arena hover:bg-white/5 transition">Preguntas</button>
+    </nav>
+    <div class="flex items-center gap-2.5">
+      <span id="nav-sesion" class="hidden text-xs text-muted font-mono"></span>
+      <button data-view-target="dashboard-marca" class="nav-link btn-ghost">Panel Marca</button>
+      <button data-view-target="dashboard-afiliado" class="nav-link btn-primary text-sm py-2 px-3.5">Panel Creador</button>
+      <button id="btn-cerrar-sesion" class="btn-ghost hidden">Salir</button>
+    </div>
+  </div>
+</header>
+
+<main id="app-root">
+
+<!-- ============================================================ -->
+<!-- VISTA 1: LANDING -->
+<!-- ============================================================ -->
+<section id="view-landing" class="view">
+
+  <div class="relative overflow-hidden">
+    <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 pt-20 pb-24 relative">
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center gap-2 text-xs font-mono font-medium tracking-wider uppercase text-gold-claro badge-gold px-3 py-1.5 rounded-full">
+          Filtro geográfico en tiempo real · IP Chile
+        </span>
+        <h1 class="font-display text-4xl sm:text-6xl font-semibold leading-[1.05] mt-6 text-arena">
+          Cada clic,<br>contado y <span class="text-gold-claro">pagado</span>.
+        </h1>
+        <p class="mt-6 text-lg text-muted max-w-xl leading-relaxed">
+          Click Mates conecta marcas con creadores de contenido en Chile. Tú generas el clic, nosotros lo auditamos, y el dinero se mueve solo entre billeteras.
+        </p>
+      </div>
+
+      <div class="mt-12 flex flex-wrap gap-3 items-center">
+        <div class="card px-5 py-3.5 rounded-xl">
+          <p class="text-xs text-muted font-mono uppercase tracking-wider mb-1">Clics CL hoy</p>
+          <p id="ticker-clicks-cl" class="font-mono text-2xl font-bold text-gold-claro">0</p>
+        </div>
+        <div class="card px-5 py-3.5 rounded-xl">
+          <p class="text-xs text-muted font-mono uppercase tracking-wider mb-1">Descartados</p>
+          <p id="ticker-clicks-foreign" class="font-mono text-2xl font-bold text-muted">0</p>
+        </div>
+        <div class="card px-5 py-3.5 rounded-xl">
+          <p class="text-xs text-muted font-mono uppercase tracking-wider mb-1">Liberado a creadores</p>
+          <p id="ticker-paid" class="font-mono text-2xl font-bold text-emerald-claro">$0</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARA MARCAS -->
+  <div id="pymes" class="max-w-7xl mx-auto px-5 sm:px-8 py-20 border-t border-white/5">
+    <div class="grid lg:grid-cols-2 gap-14 items-start">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-wider text-gold-claro">Para pymes y marcas</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold mt-3 leading-tight">Consigue clientes reales en Chile.</h2>
+        <p class="mt-4 text-muted leading-relaxed max-w-md">
+          Paga solo <span class="text-arena font-semibold">$150 CLP</span> por cada clic verificado. Tu cuenta funciona con una billetera prepago: recargas una vez y financias todas tus campañas desde ahí.
+        </p>
+        <ul class="mt-8 space-y-3 text-sm text-muted">
+          <li class="flex gap-3"><span class="text-gold-claro mt-0.5">→</span> Billetera prepago vía Webpay Plus</li>
+          <li class="flex gap-3"><span class="text-gold-claro mt-0.5">→</span> Filtro geográfico por IP en cada clic</li>
+          <li class="flex gap-3"><span class="text-gold-claro mt-0.5">→</span> Métrica por cada creador y contenido</li>
+        </ul>
+      </div>
+
+      <form id="form-marca" class="card p-7 space-y-5">
+        <h3 class="font-display font-semibold text-lg">Crea tu cuenta de marca</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="form-label">Email</label>
+            <input required type="email" id="marca-email" placeholder="marca@empresa.cl" class="form-input">
+          </div>
+          <div>
+            <label class="form-label">Contraseña</label>
+            <input required type="password" minlength="6" id="marca-password" placeholder="Mínimo 6 caracteres" class="form-input">
+          </div>
+        </div>
+        <div>
+          <label class="form-label">Nombre de la marca</label>
+          <input required type="text" id="marca-nombre" placeholder="Ej: Café Volcán" class="form-input">
+        </div>
+        <div>
+          <label class="form-label">RUT de la empresa</label>
+          <div class="flex gap-2">
+            <input required type="text" id="marca-rut" placeholder="76.543.210-K" class="form-input flex-1">
+            <button type="button" id="btn-verificar-rut-marca" class="btn-verificar">Verificar</button>
+          </div>
+          <p id="marca-rut-mensaje" class="text-xs text-muted mt-1.5">Se valida el dígito verificador antes de crear la cuenta.</p>
+        </div>
+        <div>
+          <label class="form-label">URL del producto o tienda (primera campaña)</label>
+          <input required type="url" id="marca-url" placeholder="https://tutienda.cl/producto" class="form-input">
+        </div>
+        <div>
+          <label class="form-label">Clics a solicitar (mínimo 150)</label>
+          <input required type="number" min="150" step="10" id="marca-clics-objetivo" value="150" class="form-input">
+          <p class="text-xs text-muted mt-1.5">Solo es una meta informativa — el cobro real ocurre por cada clic válido, descontado de tu billetera.</p>
+        </div>
+        <button type="submit" class="btn-primary w-full">Crear cuenta y publicar campaña</button>
+        <p class="text-xs text-muted text-center">¿Ya tienes cuenta? Inicia sesión con el mismo email y contraseña.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- PARA CREADORES -->
+  <div id="creadores" class="max-w-7xl mx-auto px-5 sm:px-8 py-20 border-t border-white/5">
+    <div class="grid lg:grid-cols-2 gap-14 items-start">
+      <form id="form-creador" class="card p-7 space-y-5 lg:order-2">
+        <h3 class="font-display font-semibold text-lg">Regístrate como creador</h3>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="form-label">Email</label>
+            <input required type="email" id="creador-email" placeholder="tu@correo.cl" class="form-input">
+          </div>
+          <div>
+            <label class="form-label">Contraseña</label>
+            <input required type="password" minlength="6" id="creador-password" placeholder="Mínimo 6 caracteres" class="form-input">
+          </div>
+        </div>
+        <div>
+          <label class="form-label">Nombre</label>
+          <input required type="text" id="creador-nombre" placeholder="Ej: Javiera Muñoz" class="form-input">
+        </div>
+        <div>
+          <label class="form-label">RUT del creador</label>
+          <div class="flex gap-2">
+            <input required type="text" id="creador-rut" placeholder="12.345.678-9" class="form-input flex-1">
+            <button type="button" id="btn-verificar-rut-creador" class="btn-verificar">Verificar</button>
+          </div>
+          <p id="creador-rut-mensaje" class="text-xs text-muted mt-1.5">Se valida el dígito verificador antes de crear la cuenta.</p>
+        </div>
+        <div>
+          <label class="form-label">Red social principal</label>
+          <select required id="creador-red" class="form-input">
+            <option value="" disabled selected>Selecciona una red</option>
+            <option>Instagram</option>
+            <option>TikTok</option>
+            <option>YouTube</option>
+            <option>X (Twitter)</option>
+            <option>Blog / Sitio propio</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">CuentaRUT / datos de transferencia</label>
+          <input required type="text" id="creador-cuenta" placeholder="CuentaRUT N° 12.345.678-9" class="form-input">
+        </div>
+        <button type="submit" class="btn-primary w-full">Crear cuenta de creador</button>
+        <p class="text-xs text-muted text-center">¿Ya tienes cuenta? Inicia sesión con el mismo email y contraseña.</p>
+      </form>
+
+      <div class="lg:order-1">
+        <span class="text-xs font-mono uppercase tracking-wider text-emerald-claro">Para creadores y afiliados</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-semibold mt-3 leading-tight">Monetiza tus redes en Chile.</h2>
+        <p class="mt-4 text-muted leading-relaxed max-w-md">
+          Gana <span class="text-arena font-semibold">$120 CLP</span> por cada clic chileno. El saldo se libera a tu billetera en bloques de 150 clics, y se transfiere cada domingo.
+        </p>
+        <ul class="mt-8 space-y-3 text-sm text-muted">
+          <li class="flex gap-3"><span class="text-emerald-claro mt-0.5">→</span> Un enlace único por cada video o post</li>
+          <li class="flex gap-3"><span class="text-emerald-claro mt-0.5">→</span> Liberación de saldo por bloques de 150 clics</li>
+          <li class="flex gap-3"><span class="text-emerald-claro mt-0.5">→</span> Transferencia semanal a tu CuentaRUT</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREGUNTAS FRECUENTES -->
+  <div id="preguntas" class="max-w-5xl mx-auto px-5 sm:px-8 py-20 border-t border-white/5">
+    <div class="text-center mb-10">
+      <span class="text-xs font-mono uppercase tracking-wider text-gold-claro">Antes de registrarte</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-semibold mt-3">Preguntas frecuentes</h2>
+      <p class="mt-3 text-muted max-w-lg mx-auto">Cómo funciona el filtro de clics, la facturación, el modelo multicreador y la seguridad de tus datos.</p>
+    </div>
+
+    <div class="flex justify-center gap-2 bg-white/5 border border-white/10 rounded-full p-1 w-fit mx-auto mb-8">
+      <button class="faq-tab active" data-faq-tab="marcas">Para marcas</button>
+      <button class="faq-tab" data-faq-tab="creadores">Para creadores</button>
+    </div>
+
+    <div id="faq-lista" class="space-y-3"></div>
+  </div>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- VISTA 2: DASHBOARD MARCA -->
+<!-- ============================================================ -->
+<section id="view-dashboard-marca" class="view hidden">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-12">
+
+    <div class="mb-8">
+      <span class="text-xs font-mono uppercase tracking-wider text-gold-claro">Panel de marca</span>
+      <h1 class="font-display text-3xl font-semibold mt-1">Tu billetera y campañas</h1>
+    </div>
+
+    <div id="marca-sin-campanas" class="empty-state hidden">
+      <p id="marca-sin-campanas-titulo" class="font-display text-lg">Necesitas iniciar sesión como marca</p>
+      <p id="marca-sin-campanas-texto" class="text-muted text-sm mt-2">Crea tu cuenta desde la sección "Para marcas" en el inicio.</p>
+      <button data-view-target="landing" data-scroll="pymes" class="nav-link btn-primary mt-5">Ir a marcas</button>
+    </div>
+
+    <div id="marca-contenido" class="hidden">
+      <div class="grid lg:grid-cols-5 gap-6 mb-8">
+
+        <!-- Billetera -->
+        <div class="lg:col-span-2 space-y-5">
+          <div class="card-paper p-6">
+            <p class="text-xs font-medium uppercase tracking-wide mb-1" style="color:#6B6252">Billetera prepagada</p>
+            <p class="text-xs mb-1" style="color:#6B6252">Saldo disponible</p>
+            <p id="stat-saldo-billetera" class="text-3xl font-semibold font-mono mb-5">$0</p>
+
+            <form id="form-recarga" class="flex gap-2 mb-4">
+              <input required type="number" min="150" step="150" id="recarga-monto" placeholder="Monto a cargar" class="form-input-on-paper flex-1">
+              <button type="submit" class="btn-dark">+ Cargar</button>
+            </form>
+
+            <div class="rounded-xl p-4 bg-ink">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs text-muted">Consumido en clics válidos</span>
+                <span id="stat-costo-total" class="text-sm font-mono font-semibold text-coral-claro">$0</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-muted">Clics válidos totales</span>
+                <span id="stat-clics-validos-total" class="text-sm font-mono text-arena">0</span>
+              </div>
+            </div>
+            <p id="marca-flash" class="flash flash-warn hidden"></p>
+          </div>
+
+          <div class="card p-5">
+            <p class="text-xs font-medium uppercase tracking-wide mb-3 text-muted">Nueva campaña</p>
+            <form id="form-nueva-campana" class="space-y-3">
+              <div>
+                <label class="form-label">Nombre de la campaña</label>
+                <input required type="text" id="nueva-campana-nombre" placeholder="Ej: Lanzamiento colección invierno" class="form-input">
+              </div>
+              <div>
+                <label class="form-label">URL del producto</label>
+                <input required type="url" id="nueva-campana-url" placeholder="https://tutienda.cl/producto" class="form-input">
+              </div>
+              <div>
+                <label class="form-label">Clics a solicitar (mínimo 150)</label>
+                <input required type="number" min="150" step="10" id="nueva-campana-clics" value="150" class="form-input">
+              </div>
+              <button type="submit" class="btn-primary w-full">Activar campaña</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Boleta de campañas -->
+        <div class="lg:col-span-3">
+          <div class="card-paper overflow-hidden">
+            <div class="px-6 pt-6 pb-2">
+              <span class="text-xs font-medium uppercase tracking-wide" style="color:#6B6252">Métricas por campaña / contenido</span>
+            </div>
+            <div class="px-6"><div class="perforation" id="perforacion-marca"></div></div>
+            <div id="lista-campanas-marca" class="px-6 pb-6 space-y-5 font-mono"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detalle antifraude -->
+      <div class="card p-5 mb-8">
+        <p class="text-xs font-medium uppercase tracking-wide mb-3 text-muted">Resumen de validación de clics</p>
+        <div id="resumen-clics-marca" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5"></div>
+
+        <p class="text-xs font-medium uppercase tracking-wide mb-3 text-muted">Detalle de clics (últimos 200)</p>
+        <div class="overflow-x-auto">
+          <table class="tabla-clics">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Creador</th>
+                <th>Contenido</th>
+                <th>IP</th>
+                <th>País</th>
+                <th>VPN</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-clics-marca"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- VISTA 3: DASHBOARD CREADOR -->
+<!-- ============================================================ -->
+<section id="view-dashboard-afiliado" class="view hidden">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-12">
+
+    <div class="mb-8">
+      <span class="text-xs font-mono uppercase tracking-wider text-emerald-claro">Panel de creador</span>
+      <h1 class="font-display text-3xl font-semibold mt-1">Tu billetera y contenidos</h1>
+    </div>
+
+    <div id="afiliado-sin-cuenta" class="empty-state hidden">
+      <p class="font-display text-lg">Necesitas iniciar sesión como creador</p>
+      <p class="text-muted text-sm mt-2">Regístrate o inicia sesión desde la sección "Para creadores" en el inicio.</p>
+      <button data-view-target="landing" data-scroll="creadores" class="nav-link btn-primary mt-5">Ir a creadores</button>
+    </div>
+
+    <div id="afiliado-contenido" class="hidden">
+      <div class="grid lg:grid-cols-5 gap-6 mb-8">
+
+        <!-- Billetera -->
+        <div class="lg:col-span-2 space-y-5">
+          <div class="card-paper p-6">
+            <p class="text-xs font-medium uppercase tracking-wide mb-1" style="color:#6B6252">Billetera del creador</p>
+            <p class="text-xs mb-1" style="color:#6B6252">Saldo disponible para retiro</p>
+            <p id="stat-saldo-disponible" class="text-3xl font-semibold font-mono mb-5">$0</p>
+
+            <div class="rounded-xl p-4 mb-4 bg-ink">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs text-muted">Saldo pendiente (sin liberar)</span>
+                <span id="stat-saldo-pendiente" class="text-sm font-mono font-semibold text-gold-claro">$0</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-muted">Clics válidos sin liberar</span>
+                <span id="stat-clics-pendientes" class="text-sm font-mono text-arena">0</span>
+              </div>
+              <div class="progreso-track mt-3">
+                <div id="progreso-liberacion" class="progreso-fill" style="width:0%; background:#C9A227"></div>
+              </div>
+              <p id="texto-liberacion" class="text-xs text-muted mt-1.5">Faltan 150 clics para liberar tu primer bloque.</p>
+            </div>
+
+            <button id="btn-liberar-saldo" class="btn-dark w-full" disabled>⚡ Liberar saldo a mi billetera</button>
+            <p id="creador-flash" class="flash flash-ok hidden"></p>
+          </div>
+
+          <div class="card p-5">
+            <p class="text-xs font-medium uppercase tracking-wide mb-3 text-muted">Resumen general</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <p class="text-xs text-muted">Clics válidos totales</p>
+                <p id="stat-clics-chile-creador" class="text-lg font-mono font-semibold text-emerald-claro">0</p>
+              </div>
+              <div>
+                <p class="text-xs text-muted">Estado de pago</p>
+                <span id="stat-estado-pago" class="badge-pendiente mt-1">Pendiente</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-5">
+            <p class="text-xs font-medium uppercase tracking-wide mb-3 text-muted">Campañas disponibles</p>
+            <div id="lista-campanas-disponibles" class="space-y-3 max-h-80 overflow-y-auto pr-1"></div>
+          </div>
+        </div>
+
+        <!-- Boleta de contenidos -->
+        <div class="lg:col-span-3">
+          <div class="card-paper overflow-hidden">
+            <div class="px-6 pt-6 pb-2">
+              <span class="text-xs font-medium uppercase tracking-wide" style="color:#6B6252">Métricas de tus contenidos</span>
+            </div>
+            <div class="px-6"><div class="perforation" id="perforacion-creador"></div></div>
+            <div id="lista-mis-contenidos" class="px-6 pb-6 space-y-5 font-mono"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detalle antifraude -->
+      <div class="card p-5 mb-8">
+        <p class="text-xs font-medium uppercase tracking-wide mb-3 text-muted">Resumen de validación de clics</p>
+        <div id="resumen-clics-creador" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5"></div>
+
+        <p class="text-xs font-medium uppercase tracking-wide mb-3 text-muted">Detalle de clics (últimos 200)</p>
+        <div class="overflow-x-auto">
+          <table class="tabla-clics">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Marca</th>
+                <th>Contenido</th>
+                <th>IP</th>
+                <th>País</th>
+                <th>VPN</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-clics-creador"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div id="toast" class="toast hidden"></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
